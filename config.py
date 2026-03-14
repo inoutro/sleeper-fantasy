@@ -16,14 +16,14 @@ def _required(key: str) -> str:
 
 LEAGUES = [
     {
-        "id": _required("LEAGUE1_ID"),
+        "id": os.getenv("LEAGUE1_ID"),
         "name": "This is for you!",
-        "roster_id": int(_required("LEAGUE1_ROSTER_ID")),
+        "roster_id": int(os.getenv("LEAGUE1_ROSTER_ID")),
     },
     {
-        "id": _required("LEAGUE2_ID"),
+        "id": os.getenv("LEAGUE2_ID"),
         "name": "모래지옥 NBA Dynasty 판타지 리그",
-        "roster_id": int(_required("LEAGUE2_ROSTER_ID")),
+        "roster_id": int(os.getenv("LEAGUE2_ROSTER_ID")),
     },
 ]
 
