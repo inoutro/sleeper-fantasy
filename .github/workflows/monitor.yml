@@ -28,6 +28,26 @@ jobs:
           key: monitor-state-${{ github.run_id }}
           restore-keys: monitor-state-
 
+      - name: Check secrets
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SLEEPER_USER_ID: ${{ secrets.SLEEPER_USER_ID }}
+          SLEEPER_USERNAME: ${{ secrets.SLEEPER_USERNAME }}
+          LEAGUE1_ID: ${{ secrets.LEAGUE1_ID }}
+          LEAGUE1_ROSTER_ID: ${{ secrets.LEAGUE1_ROSTER_ID }}
+          LEAGUE2_ID: ${{ secrets.LEAGUE2_ID }}
+          LEAGUE2_ROSTER_ID: ${{ secrets.LEAGUE2_ROSTER_ID }}
+        run: |
+          echo "TELEGRAM_BOT_TOKEN: $([[ -n "$TELEGRAM_BOT_TOKEN" ]] && echo SET || echo MISSING)"
+          echo "TELEGRAM_CHAT_ID: $([[ -n "$TELEGRAM_CHAT_ID" ]] && echo SET || echo MISSING)"
+          echo "SLEEPER_USER_ID: $([[ -n "$SLEEPER_USER_ID" ]] && echo SET || echo MISSING)"
+          echo "SLEEPER_USERNAME: $([[ -n "$SLEEPER_USERNAME" ]] && echo SET || echo MISSING)"
+          echo "LEAGUE1_ID: $([[ -n "$LEAGUE1_ID" ]] && echo SET || echo MISSING)"
+          echo "LEAGUE1_ROSTER_ID: $([[ -n "$LEAGUE1_ROSTER_ID" ]] && echo SET || echo MISSING)"
+          echo "LEAGUE2_ID: $([[ -n "$LEAGUE2_ID" ]] && echo SET || echo MISSING)"
+          echo "LEAGUE2_ROSTER_ID: $([[ -n "$LEAGUE2_ROSTER_ID" ]] && echo SET || echo MISSING)"
+
       - name: Run monitor check
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
