@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""GitHub Actions에서 한 번만 실행하는 진입점"""
-from src.monitor import run_once
+import os
+print("LEAGUE1_ID:", os.getenv("LEAGUE1_ID"))
+print("LEAGUE2_ID:", os.getenv("LEAGUE2_ID"))
 
+from src.monitor import run_once
 run_once()
