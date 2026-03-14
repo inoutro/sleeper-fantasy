@@ -1,0 +1,41 @@
+name: Sleeper Fantasy Monitor
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # 5분마다 실행
+  workflow_dispatch:        # 수동 실행 버튼
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # 이전 실행의 state.json 복원 (중복 알람 방지)
+      - name: Restore state
+        uses: actions/cache@v4
+        with:
+          path: state.json
+          key: monitor-state-${{ github.run_id }}
+          restore-keys: monitor-state-
+
+      - name: Run monitor check
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SLEEPER_USER_ID: ${{ secrets.SLEEPER_USER_ID }}
+          SLEEPER_USERNAME: ${{ secrets.SLEEPER_USERNAME }}
+          LEAGUE1_ID: ${{ secrets.LEAGUE1_ID }}
+          LEAGUE1_ROSTER_ID: ${{ secrets.LEAGUE1_ROSTER_ID }}
+          LEAGUE2_ID: ${{ secrets.LEAGUE2_ID }}
+          LEAGUE2_ROSTER_ID: ${{ secrets.LEAGUE2_ROSTER_ID }}
+        run: python check.py

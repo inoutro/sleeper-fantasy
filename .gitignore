@@ -1,0 +1,22 @@
+# 환경변수 (토큰, 비밀키)
+.env
+
+# 모니터 상태 파일
+state.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# 로그
+logs.txt
+*.log
+
+# macOS
+.DS_Store
+
+# Claude Code
+.claude/
