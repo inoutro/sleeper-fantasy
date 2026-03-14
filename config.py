@@ -1,7 +1,8 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+if os.path.exists(".env"):
+    load_dotenv()
 
 USER_ID = os.getenv("SLEEPER_USER_ID")
 USERNAME = os.getenv("SLEEPER_USERNAME")
