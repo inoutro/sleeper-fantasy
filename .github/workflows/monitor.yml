@@ -1,9 +1,7 @@
 name: Sleeper Fantasy Monitor
 
 on:
-  schedule:
-    - cron: '*/5 * * * *'  # 5분마다 실행
-  workflow_dispatch:        # 수동 실행 버튼
+  workflow_dispatch:  # 수동 실행만 (시즌 종료로 자동 스케줄 비활성화)
 
 jobs:
   monitor:
